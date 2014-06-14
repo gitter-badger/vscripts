@@ -19,6 +19,7 @@ Automation daemon.
 ## Configuration
 
 VScripts looks for a configuration file in the following locations(in order):
+
   - a file specified in the `--config` command line option
   - `.vscripts.yml` in the $HOME directory
   - `/etc/vscripts/config.yml`

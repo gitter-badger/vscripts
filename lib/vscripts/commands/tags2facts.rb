@@ -33,31 +33,33 @@ behaviour can be overridden by adding `[-a|--all]` command line option.
 
       # Loads the Tags2Facts class
       # @param argv [Array] the command specific arguments
-      def initialize(argv = [])
-        @arguments ||= argv
+      def initialize(args = [])
+        parse(args)
       end
 
       # Specifies command line options
+      # This method smells of :reek:TooManyStatements but ignores them
       def parser
         Trollop::Parser.new do
           banner USAGE
           opt :file, 'The file that will store the tags',
               type: :string, default: '/etc/facter/facts.d/ec2_tags.json'
           opt :all, 'Collect all tags'
+          opt :help, 'Show this menu', short: '-h'
           stop_on_unknown
         end
       end
 
       # @return [Hash] the command line arguments
-      def cli
-        @cli ||= Trollop.with_standard_exception_handling parser do
-          parser.parse arguments
+      def parse(args)
+        Trollop.with_standard_exception_handling parser do
+          @arguments = parser.parse args
         end
       end
 
       # @return [Array] the tags to exclude
       def exclude_list
-        cli.all ? [] : %w(Name Domain)
+        arguments.all ? [] : %w(Name Domain)
       end
 
       # @return [JSON] the formatted JSON string
@@ -72,7 +74,7 @@ behaviour can be overridden by adding `[-a|--all]` command line option.
 
       # Writes the formatted JSON to the file
       def execute
-        file = cli.file
+        file = arguments.file
         puts "Writing tags to \"#{file}\""
         ensure_file_content(file, tags_json)
         puts 'Done.'

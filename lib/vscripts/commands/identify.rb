@@ -42,22 +42,13 @@ domain.
   OPTIONS:
       EOS
 
-      # @return [String] the theme
-      attr_reader :theme
-      # @return [String] the host name
-      attr_reader :host
-      # @return [String] the domain name
-      attr_reader :domain
       # @return [Array] the command specific arguments
       attr_reader :arguments
 
       # Loads the Identify command
       # @param argv [Array] the command specific arguments
-      def initialize(argv = [])
-        @arguments ||= argv
-        @theme     ||= cli.ec2_tag_theme
-        @host      ||= cli.host
-        @domain    ||= cli.domain
+      def initialize(args = [])
+        parse(args)
       end
 
       # Specifies command line options
@@ -69,21 +60,22 @@ domain.
               type: :string, default: 'Group-Role-#', short: '-t'
           opt :host, 'Host name', type: :string, short: '-n'
           opt :domain, 'Domain name', type: :string, short: '-d'
+          opt :help, 'Show this menu', short: '-h'
           stop_on_unknown
         end
       end
 
       # @return [Hash] the command line arguments
-      def cli
-        @cli ||= Trollop.with_standard_exception_handling parser do
-          parser.parse arguments
+      def parse(args)
+        Trollop.with_standard_exception_handling parser do
+          @arguments = parser.parse args
         end
       end
 
       # Splits theme into elements
       # @return [Array] the theme elements
       def theme_elements
-        theme.split('-')
+        arguments.ec2_tag_theme.split('-')
       end
 
       # Lists values corresponding to each tag specified in the theme
@@ -104,7 +96,7 @@ domain.
       # @return [String] the incremented host name
       def incremented_hostname
         number = 1
-        while similar_instances.include? "#{themed_host_name}.#{domain}"
+        while similar_instances.include? "#{themed_host_name}.#{new_domain}"
           .sub(/#/, "#{number}")
           number += 1
         end
@@ -115,14 +107,14 @@ domain.
       # local hostname
       # @return [String] the new hostname
       def new_hostname
-        host || incremented_hostname || local_host_name
+        arguments.host || incremented_hostname || local_host_name
       end
 
       # The value of the command line `--domain` argument, or the
       # value of the 'Domain' EC2 tag or the local domain name.
       # @return [String] the new domain name
       def new_domain
-        domain || tag('Domain') || local_domain_name
+        arguments.domain || tag('Domain') || local_domain_name
       end
 
       # @return [String] the fully qualified domain name

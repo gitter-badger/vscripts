@@ -76,7 +76,7 @@ end
 
 shared_context 'Not an EC2 Instance' do
   before(:each) do
-   allow(Net::HTTP).to receive(:get_response).and_return(false)
+    allow(Net::HTTP).to receive(:get_response).and_return(false)
   end
 end
 

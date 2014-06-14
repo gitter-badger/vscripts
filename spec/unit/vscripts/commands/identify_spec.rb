@@ -5,7 +5,7 @@ describe VScripts::Commands::Identify do
   before :each do
     allow(subject).to receive(:tag).and_return('TestTag')
     allow(subject).to receive(:similar_instances)
-      .and_return(['TestTag-TestTag-1.'])
+      .and_return(['TestTag-TestTag-1.TestTag'])
   end
 
   describe 'USAGE' do
@@ -16,45 +16,45 @@ describe VScripts::Commands::Identify do
 
   describe '#new' do
     it 'returns extra arguments' do
-      expect(subject.arguments).to be_an Array
+      expect(subject.arguments).to be_a Hash
     end
 
     context 'when theme is not passed' do
       it 'returns the default theme' do
-        expect(subject.theme).to eq('Group-Role-#')
+        expect(subject.theme_elements).to match_array(["Group", "Role", "#"])
       end
     end
 
     context 'when theme is passed' do
       it 'returns the theme' do
         subject = VScripts::Commands::Identify.new(['--ec2-tag-theme=test'])
-        expect(subject.theme).to eq('test')
+        expect(subject.theme_elements).to match_array(['test'])
       end
     end
 
     context 'when host is not passed' do
       it 'host is nil' do
-        expect(subject.host).to be_nil
+        expect(subject.new_hostname).to be_a String
       end
     end
 
     context 'when host is passed' do
       it 'returns the host' do
         subject = VScripts::Commands::Identify.new(['--host=test'])
-        expect(subject.host).to eq('test')
+        expect(subject.new_hostname).to eq('test')
       end
     end
 
     context 'when domain is not passed' do
       it 'domain is nil' do
-        expect(subject.domain).to be_nil
+        expect(subject.new_domain).to eq('TestTag')
       end
     end
 
     context 'when domain is passed' do
       it 'returns the domain' do
         subject = VScripts::Commands::Identify.new(['--domain=test'])
-        expect(subject.domain).to eq('test')
+        expect(subject.new_domain).to eq('test')
       end
     end
   end
@@ -65,9 +65,9 @@ describe VScripts::Commands::Identify do
     end
   end
 
-  describe '#cli' do
+  describe '#parse' do
     it 'returns cli arguments as a Hash' do
-      expect(subject.cli).to be_a Hash
+      expect(subject.parse([])).to be_a Hash
     end
   end
 

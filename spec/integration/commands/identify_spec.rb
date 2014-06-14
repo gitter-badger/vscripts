@@ -90,7 +90,7 @@ describe 'Command: Identify' do
         stub_cli_with('identify --ec2-tag-theme=Test-#')
         allow_any_instance_of(identify).to receive(:tag)
           .and_return('TestName')
-        allow_any_instance_of(identify).to receive(:domain)
+        allow_any_instance_of(identify).to receive(:new_domain)
           .and_return('TestDomain.tld')
         subject
         expect(IO.read(hostname_file)).to eq('TestName-2')

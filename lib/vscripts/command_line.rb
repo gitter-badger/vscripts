@@ -42,6 +42,8 @@ GLOBAL OPTIONS:
 EOS
         opt :config, 'Specify configuration file',
             type: :string, short: '-c'
+        opt :help, 'Show this menu', short: '-h'
+        opt :version, 'Show version', short: '-v'
         stop_on available
         stop_on_unknown
       end
@@ -54,7 +56,6 @@ EOS
         @global = parser.parse args
         fail Trollop::HelpNeeded if args.empty? || !parse_command(args)
       end
-      @global
     end
 
     # Ensures command is available

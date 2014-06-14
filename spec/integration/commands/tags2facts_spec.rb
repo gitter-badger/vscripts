@@ -52,10 +52,10 @@ describe 'Command: Tags2Facts' do
     context 'with tags' do
       before(:each) do
         allow_any_instance_of(tags2facts)
-          .to receive_message_chain('cli.file')
+          .to receive_message_chain('arguments.file')
           .and_return(test_file)
         allow_any_instance_of(tags2facts)
-          .to receive_message_chain('cli.all').and_return(false)
+          .to receive_message_chain('arguments.all').and_return(false)
       end
 
       context '--all specified' do
@@ -63,7 +63,7 @@ describe 'Command: Tags2Facts' do
         it 'creates file' do
           stub_cli_with('tags2facts --all')
           allow_any_instance_of(tags2facts)
-            .to receive_message_chain('cli.all').and_return(true)
+            .to receive_message_chain('arguments.all').and_return(true)
           subject
           expect(IO.read(test_file)).to match(tags['Name'])
         end
