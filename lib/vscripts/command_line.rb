@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'trollop'
 require 'vscripts/version'
 require 'vscripts/commands'

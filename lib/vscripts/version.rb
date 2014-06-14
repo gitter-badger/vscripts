@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module VScripts
   # This module holds the version information.
   module VERSION

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'aws-sdk'
 require 'logger'
 require 'yaml'

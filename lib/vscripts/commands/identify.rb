@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'vscripts/aws'
 require 'vscripts/util'
 

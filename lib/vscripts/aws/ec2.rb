@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module VScripts
   module AWS
     # EC2 Module smells of :reek:UncommunicativeModuleName

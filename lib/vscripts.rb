@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'vscripts/commands'
 require 'vscripts/command_line'
 require 'vscripts/config'

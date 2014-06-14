@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'vscripts/commands/tags2facts'
 require 'vscripts/commands/identify'
 
