@@ -10,7 +10,7 @@ module VScripts
     module EC2
       # Loads AWS SDK for EC2
       def ec2
-        ::AWS::EC2.new(region: region)
+        ::AWS::EC2.new
       end
 
       # @return [AWS::EC2::Instance] the current instance

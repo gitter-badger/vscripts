@@ -17,6 +17,7 @@ module VScripts
 
   # Reads the arguments and runs the given command
   def self.run
+    VScripts::AWS.configure
     VScripts::Commands.const_get(cli.command).new(cli.command_options).execute
   end
 end # module VScripts

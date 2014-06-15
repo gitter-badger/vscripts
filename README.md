@@ -24,6 +24,22 @@ VScripts looks for a configuration file in the following locations(in order):
   - `.vscripts.yml` in the $HOME directory
   - `/etc/vscripts/config.yml`
 
+If these files are missing, environment variables will be used instead.
+
+### Options:
+
+  - `AWS`
+    - `:access_key_id: 'KEY'`
+    - `:secret_access_key: 'SECRET'`
+    - `:region: 'us-east-1'`
+    - see the full list at [AWS.config](http://docs.aws.amazon.com/AWSRubySDK/latest/AWS.html#config-class_method)
+
+### Environment:
+
+- `AWS_ACCESS_KEY_ID='...'`
+- `AWS_SECRET_ACCESS_KEY='...'`
+- `AWS_REGION='us-west-2'`
+
 ## Usage
 
 ```
