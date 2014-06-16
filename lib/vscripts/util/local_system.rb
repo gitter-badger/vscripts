@@ -33,9 +33,7 @@ module VScripts
       # Tries to get the reverse dns
       # @return [String] the reverse dns
       def external_dns
-        ext_ip = `wget -q -O - checkip.dyndns.org \
-          | sed -e 's/[^[:digit:]|.]//g'`
-        `dig +short -x #{ext_ip}`.strip
+        `dig +short myip.opendns.com @resolver1.opendns.com`.strip
       rescue
         false
       end
