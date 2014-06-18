@@ -1,6 +1,7 @@
 # encoding: UTF-8
 require 'vscripts/commands/tags2facts'
 require 'vscripts/commands/identify'
+require 'vscripts/commands/api'
 
 module VScripts
   # Commands module
@@ -11,5 +12,5 @@ module VScripts
         VScripts::Commands.const_get(cls).is_a? Class
       end
     end
-  end # class Command
+  end # module Commands
 end # module VScripts

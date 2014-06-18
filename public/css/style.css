@@ -1,0 +1,12 @@
+body {
+  width: 400px;
+  margin:0 auto;
+  text-align: center;
+}
+#logo
+{
+  float: left;
+}
+h1, h2 {
+  color: #084FAA;
+}

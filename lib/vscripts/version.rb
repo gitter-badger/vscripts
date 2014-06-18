@@ -10,5 +10,5 @@ module VScripts
 
     # @return [String] the copyrighted version number
     COPYRIGHT = "VScripts #{STRING} (c) #{Time.new.year} Vlad Ghinea"
-  end
-end
+  end # module VERSION
+end # module VScripts

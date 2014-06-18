@@ -31,10 +31,13 @@ EOF
 
   spec.add_runtime_dependency 'aws-sdk', '~> 1.0'
   spec.add_runtime_dependency 'trollop', '~> 2.0'
+  spec.add_runtime_dependency 'sinatra', '~> 1.0'
 
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'bundler', '~> 1.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'rack', '~> 1.0'
+  spec.add_development_dependency 'rack-test', '~> 0.0'
   spec.add_development_dependency 'yard', '~> 0.0'
   spec.add_development_dependency 'reek', '~> 1.0'
   spec.add_development_dependency 'rubocop', '~> 0.0'

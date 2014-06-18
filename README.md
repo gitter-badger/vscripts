@@ -14,6 +14,7 @@ Automation daemon.
 ## Installing
 
 ### Gem installation
+
 `gem install vscripts`
 
 ## Configuration
@@ -48,6 +49,7 @@ vscripts GLOBAL-OPTIONS COMMAND OPTIONS
 
 
 ### Global Options
+
 ```
 --config,  -c <s>: Specify configuration file
 --help,    -h    : Displays VScripts help
@@ -58,6 +60,7 @@ vscripts GLOBAL-OPTIONS COMMAND OPTIONS
 ### Commands
 
 1. **Tags2Facts**
+
   This command can only be run on an AWS EC2 instance. It looks for all tags
 associated with it and dumps them in a JSON file. By default this file is
 `/etc/facter/facts.d/ec2_tags.json`. It can be overridden with the
@@ -83,6 +86,7 @@ can be overridden by adding `[-a|--all]` command line option.
     ```
 
 2. **Identify**
+
   This command creates a themed host name and fully qualified domain name for
 the server, using AWS EC2 tags. The default theme is `Group-Role-#` which means
 that the command collects the value of the `Group` and the `Role` AWS EC2 tags
@@ -120,6 +124,27 @@ associated with the current instance.
     MyName-1.Example.tld
     $ vscripts identify --host myhost --domain example.com
     myhost.example.com
+    ```
+
+3. **API**
+
+  This command stars the API server. The default port is `2583`.
+
+    **Sub-commands**:
+
+    `start` Starts the API server in foreground
+
+    **Options**:
+
+    ```
+    --help, -h: Shows help
+    ```
+
+    **Examples**:
+
+    ```
+    $ vscripts api --help
+    $ vscripts api start
     ```
 
 

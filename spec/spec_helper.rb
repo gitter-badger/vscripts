@@ -45,6 +45,18 @@ RSpec.configure {|config|
   }
 }
 
+# Include the Rack test methods
+require 'rack/test'
+include Rack::Test::Methods
+
+# Set the Sinatra environment
+ENV['RACK_ENV'] = 'test'
+
+# Add an app method for RSpec
+def app
+  VScripts::API
+end
+
 shared_context 'Temporary' do
   let(:temp_dir) { TEMP_DIR }
   let(:test_dir) { "#{TEMP_DIR}/test-dir" }
