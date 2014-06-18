@@ -1,5 +1,6 @@
 # encoding: UTF-8
 require 'sinatra/base'
+require 'vscripts/aws/sns'
 
 module VScripts
   # Main API class
@@ -11,6 +12,9 @@ module VScripts
     set :port, 2583
     enable :sessions, :dump_errors, :show_exceptions, :method_override,
            :static, :logging
+
+    # Helpers
+    helpers VScripts::AWS::SNS
 
     # Sets the title
     before do
@@ -24,6 +28,12 @@ module VScripts
     # @method get_all
     # Gets the index page
     get '/', &show_main
+
+    # SimpleNotificationService
+# FIXME: Untested
+    post '/sns' do
+      analyze_request(env, request.body.read)
+    end
 
     # Sets the version header
     after do
